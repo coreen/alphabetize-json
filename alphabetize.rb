@@ -8,10 +8,11 @@ data_hash = JSON.parse(input_file)
 
 # Write sorted result to another file
 output_file = File.new('actual.json', 'w')
-output_file.write('{\n')
+# using double quotes to evaluate special characters
+output_file.write("{\n")
 data_hash.keys.sort.each do |key|
 	val = data_hash[key]
-	output_file.write('\t' + key + ': ' + val + ',\n')
+	output_file.write("\t\"" + key + "\": " + val + "\",\n")
 end
-output_file.write('}')
+output_file.write("}")
 output_file.close
