@@ -18,11 +18,11 @@ unless supported_file_extensions.include? File.extname(input_filepath) and suppo
 	exit(false)
 end
 
-input_file = File.read('input.json')
+input_file = File.read(input_filepath)
 data_hash = JSON.parse(input_file)
 
 # Write sorted result to another file
-output_file = File.new('actual.json', 'w')
+output_file = File.new(output_filepath, 'w')
 # Using double quotes to evaluate special characters
 output_file.write("{\n")
 data_hash.keys.sort.each do |key|
