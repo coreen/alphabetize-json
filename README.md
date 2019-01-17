@@ -16,5 +16,6 @@ Comparisons
 | Input             | Output                    |
 |-------------------|---------------------------|
 | input.json        | expected.json             |
+| multi-level.json  | multi-level-expected.json |
  -----------------------------------------------
 

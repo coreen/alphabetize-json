@@ -1,0 +1,9 @@
+{
+  "CHART": {
+    "BAR": "bar chart",
+    "LINE": "line chart"
+  },
+  "DASHBOARD": "dashboard",
+  "PAGE": "page",
+  "WIDGET": "widget"
+}
