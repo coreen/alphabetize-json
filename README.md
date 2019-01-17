@@ -17,5 +17,6 @@ Comparisons
 |-------------------|---------------------------|
 | input.json        | expected.json             |
 | multi-level.json  | multi-level-expected.json |
+| duplicates.json   | expected.json             |
  -----------------------------------------------
 
