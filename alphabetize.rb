@@ -35,14 +35,13 @@ output_file.write("{\n")
 sorted_data_hash = data_hash.sort
 # fencepost
 if sorted_data_hash.length >= 1
-	puts sorted_data_hash.first
 	key, val = sorted_data_hash.first
-	output_file.write("\t\"" + key + "\": " + val + "\"")
+	output_file.write("\t\"" + key + "\": \"" + val + "\"")
 end
 sorted_data_hash.shift
 sorted_data_hash.each do |key, val|
 	val = data_hash[key]
-	output_file.write(",\n\t\"" + key + "\": " + val + "\"")
+	output_file.write(",\n\t\"" + key + "\": \"" + val + "\"")
 end
 output_file.write("\n}")
 output_file.close
