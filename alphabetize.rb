@@ -27,7 +27,7 @@ end
 
 
 def object_sort (level, object, output_file)
-	sorted_keys = object.keys.sort_by(&:upcase)
+	sorted_keys = object.keys.sort_by(&:upcase).uniq
 	for i in 0..(sorted_keys.length - 1)
 		key = sorted_keys[i]
 		val = object[key]
