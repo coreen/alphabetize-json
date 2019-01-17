@@ -25,6 +25,37 @@ unless supported_file_extensions.include? File.extname(input_filepath) and suppo
 	exit(false)
 end
 
+
+def object_sort (level, object, output_file)
+	sorted_keys = object.keys.sort_by(&:upcase)
+	for i in 0..(sorted_keys.length - 1)
+		key = sorted_keys[i]
+		val = object[key]
+
+		# create necessary spacing for this level
+		line = ''
+		if i > 0
+			line += ",\n"
+		end
+		for j in 0..(level - 1)
+			line += "\t"
+		end
+		if val.is_a?(String)
+			# regular print
+			line += "\"" + key + "\": \"" + val + "\""
+			output_file.write(line)
+		else
+			# subobject, recurse
+			start = line + "\"" + key + "\": {\n"
+			output_file.write(start)
+			object_sort(level + 1, val, output_file)
+			finish = "\n" + line + '}'
+			output_file.write(finish)
+		end
+	end
+end
+
+
 input_file = File.read(input_filepath)
 data_hash = JSON.parse(input_file)
 
@@ -32,17 +63,9 @@ data_hash = JSON.parse(input_file)
 output_file = File.new(output_filepath, 'w')
 # Using double quotes to evaluate special characters
 output_file.write("{\n")
-sorted_data_hash = data_hash.sort
-# fencepost
-if sorted_data_hash.length >= 1
-	key, val = sorted_data_hash.first
-	output_file.write("\t\"" + key + "\": \"" + val + "\"")
-end
-sorted_data_hash.shift
-sorted_data_hash.each do |key, val|
-	val = data_hash[key]
-	output_file.write(",\n\t\"" + key + "\": \"" + val + "\"")
-end
+
+object_sort(1, data_hash, output_file)
+
 output_file.write("\n}")
 output_file.close
 
